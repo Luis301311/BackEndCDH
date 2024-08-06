@@ -1,31 +1,39 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { createProduct } from './dto/create-product.dto';
+import { CreateProduct } from './dto/create-product.dto';
 import { updateProduct } from './dto/update-product.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Product } from './entities/product.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProductsService {
-    private products :  createProduct []
+
+    constructor(@InjectRepository(Product) private productRepository : Repository<Product>){}
+
+
 
     getAllProducts(){
-        return this.products
+        return this.productRepository.find()
     }
 
-    getProduct(id:string ){
-        const product=  this.products.find(product => product.id ===id)
-        
-        if(!product){
-            return new NotFoundException(`Product with id ${id} "not found` )
-        }
-
-        return product
+    getProduct(id: string ){
+        return this.productRepository.findOne({
+            where : {
+                id
+            }
+        })
     }
 
-    createProducts(task : createProduct){
-        return this.products.push(task)
+    createProducts(product : CreateProduct){
+        const newProduct = this.productRepository.create(product)
+        return this.productRepository.save(newProduct)
     }
 
-    updateProducts(id : number, task: updateProduct){
-        console.log(task)
-        return "producto actualizado"
+    updateProducts(id : string, product: updateProduct){
+         return this.productRepository.update({id},product)
+    }
+
+    deleteProdcuct(id : string){
+        return this.productRepository.delete({id})
     }
 }
