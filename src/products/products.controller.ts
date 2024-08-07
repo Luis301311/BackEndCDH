@@ -1,8 +1,9 @@
 import { Body, Controller,Delete,Get, Param, Patch, Post} from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { CreateProduct } from './dto/create-product.dto';
+import { CreateProductDTO } from './dto/create-product.dto';
 import { updateProduct } from './dto/update-product.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Product } from './entities/product.entity';
 
 @Controller('/products')
 @ApiTags("Products")
@@ -19,8 +20,8 @@ export class ProductsController {
     }
 
     @Post()
-    createProducts(@Body() task : CreateProduct){
-        return this.productsServices.createProducts(task)
+    createProducts(@Body() product : CreateProductDTO){
+        return this.productsServices.createProduct(product)
     }
 
     @Patch(':id')

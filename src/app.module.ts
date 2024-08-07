@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import {ConfigModuleSetup} from './config'
 import { GroupModule } from './group/group.module';
 import { UnitModule } from './unit/unit.module';
+import { TasxModule } from './tasx/tasx.module';
 
 
 @Module({
@@ -21,6 +22,6 @@ import { UnitModule } from './unit/unit.module';
       synchronize: true,
     }),
     ProductsModule, 
-    UsersModule, GroupModule, UnitModule],
+    UsersModule, GroupModule, UnitModule, TasxModule],
 })
 export class AppModule {}

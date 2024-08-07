@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsBoolean, IsNumber } from 'class-validator';
 
-export class CreateProduct {
+export class CreateProductDTO {
   @ApiProperty({ description: 'The unique identifier for the product', example: '12345' })
   @IsString()
   id: string;

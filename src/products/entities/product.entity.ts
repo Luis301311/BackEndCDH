@@ -1,4 +1,6 @@
-import { Column, Entity,PrimaryGeneratedColumn } from "typeorm"
+import { Group } from "src/group/entities/group.entity";
+import { Unit } from "src/unit/entities/unit.entity";
+import { Column, Entity,JoinColumn,ManyToOne,PrimaryGeneratedColumn } from "typeorm"
 
 
 @Entity({ name: 'products' })
@@ -51,9 +53,11 @@ export class Product {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
-  @Column()
-  groupId: number;
+  @ManyToOne(() => Group, (group) => group.products)
+  @JoinColumn({ name: 'groupId' })
+  group: Group;
 
-  @Column()
-  unitCode: string;
+  @ManyToOne(() => Unit, (unit) => unit.products)
+  @JoinColumn({ name: 'unitCode' })
+  unit: Unit;
 }
