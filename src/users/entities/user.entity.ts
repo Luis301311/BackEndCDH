@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity,PrimaryColumn,  Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 @Entity('users')
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryColumn({ type: 'varchar', length: 11, unique: true })
+    id: string;
 
     @Column({ type: 'varchar', length: 100, unique: true })
     email: string;
@@ -22,4 +22,8 @@ export class User {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @Column({ type: 'varchar', length: 50, nullable: true })
+    rol: string;
+
 }

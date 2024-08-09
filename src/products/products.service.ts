@@ -33,8 +33,7 @@ export class ProductsService {
     }
 
     async createProduct(createProductDto: CreateProductDTO) {
-        const { groupId, unitCode, ...productData } = createProductDto;
-    
+        const { groupId, unitCode,  ...productData } = createProductDto;
         const productFound = await this.productRepository.findOne({
           where: { id: createProductDto.id },
         });

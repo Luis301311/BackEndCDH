@@ -3,6 +3,11 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString, Length } from 'class-validat
 export class CreateUserDto {
     @IsEmail()
     @IsNotEmpty()
+    id: string;
+
+
+    @IsEmail()
+    @IsNotEmpty()
     email: string;
 
     @IsString()
@@ -19,4 +24,10 @@ export class CreateUserDto {
     @IsString()
     @Length(1, 50)  
     lastName?: string;
+
+
+    @IsString()
+    @IsNotEmpty()
+    @Length(1, 50)  
+    rol: string;
 }

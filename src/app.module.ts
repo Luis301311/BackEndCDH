@@ -6,6 +6,7 @@ import {ConfigModuleSetup} from './config'
 import { GroupModule } from './group/group.module';
 import { UnitModule } from './unit/unit.module';
 import { TasxModule } from './tasx/tasx.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -22,6 +23,6 @@ import { TasxModule } from './tasx/tasx.module';
       synchronize: true,
     }),
     ProductsModule, 
-    UsersModule, GroupModule, UnitModule, TasxModule],
+    UsersModule, GroupModule, UnitModule, TasxModule, AuthModule],
 })
 export class AppModule {}

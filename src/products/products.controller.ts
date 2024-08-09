@@ -1,15 +1,19 @@
-import { Body, Controller,Delete,Get, Param, Patch, Post} from '@nestjs/common';
+import { Body, Controller,Delete,Get, Param, Patch, Post, UseGuards} from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { updateProduct } from './dto/update-product.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Product } from './entities/product.entity';
+import { Roles } from 'src/roles.decorador';
+import { RolesGuard } from 'src/roles.guard';
+
 
 @Controller('/products')
 @ApiTags("Products")
+@UseGuards(RolesGuard)
 export class ProductsController {
     constructor (private productsServices : ProductsService){}
     @Get()
+    @Roles('admin')
     getAllProducts(){
         return this.productsServices.getAllProducts()
     }
